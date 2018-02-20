@@ -12,7 +12,7 @@ const secret = config.SECRET;
 
 let createToken = (user) => {
 	let payload = {
-		sub: user.userId,
+		sub: user._id,
 		iat: Math.floor(Date.now() / 1000) - 30,
 		exp: Math.floor(Date.now() / 1000) + 86400000
 	};

@@ -3,7 +3,6 @@
 const User = require('./usermodel').User;
 
 module.exports.signup = (input, callback) => {
-	input.role = 'user';
 	let newuser = new User(input);
 	newuser.save((err, data) => {
 		return callback(err, data);
