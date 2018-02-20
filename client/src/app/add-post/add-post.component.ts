@@ -8,26 +8,39 @@ import { CommonService } from '../service/common.service';
   selector: 'app-add-post',
   templateUrl: './add-post.component.html',
   styleUrls: ['./add-post.component.css'],
-  providers: [ AddPostService ]
+  providers: [AddPostService]
 })
 export class AddPostComponent {
 
   @ViewChild('closeBtn') closeBtn: ElementRef;
-  public post : Post;
+  public post: Post;
 
   constructor(private addPostService: AddPostService, private router: Router, private commonService: CommonService) {
-  	this.post = new Post();
+    this.post = new Post();
   }
 
   addPost() {
-  	if(this.post.title && this.post.description){
-  		this.addPostService.addPost(this.post).subscribe(res =>{
-  			this.closeBtn.nativeElement.click();
-        this.commonService.notifyPostAddition();
-  		});
-  	} else {
-  		alert('Title and Description required');
-  	}
+    if (this.post.title && this.post.description) {
+      if (this.post._id) {
+        this.addPostService.updatePost(this.post).subscribe(res => {
+          this.closeBtn.nativeElement.click();
+          this.commonService.notifyPostAddition();
+        });
+      } else {
+        this.addPostService.addPost(this.post).subscribe(res => {
+          this.closeBtn.nativeElement.click();
+          this.commonService.notifyPostAddition();
+        });
+      }
+    } else {
+      alert('Title and Description required');
+    }
+  }
+
+  ngOnInit() {
+    this.commonService.postEdit_Observable.subscribe(res => {
+      this.post = this.commonService.post_to_be_edited;
+    });
   }
 
 }

@@ -3,17 +3,17 @@
         <ul class="nav nav-pills float-right">
             <li class="nav-item">
                 <button type="button" class="btn btn-primary">
-                  Home
+                    Home
                 </button>
             </li>
             <li class="nav-item">
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
-                  Add
+                <button #addPost type="button" class="btn btn-link" data-toggle="modal" data-target="#exampleModal">
+                    Add
                 </button>
             </li>
             <li class="nav-item">
-                 <button type="button" class="btn btn-link">
-                  Logout
+                <button type="button" class="btn btn-link">
+                    Logout
                 </button>
             </li>
         </ul>
@@ -22,10 +22,10 @@
 </header>
 
 <main role="main">
-   
+
     <app-show-post></app-show-post>
     <app-add-post (postAdded)="handlePostAdded()"></app-add-post>
-    
+
 </main>
 
 <footer class="footer">
